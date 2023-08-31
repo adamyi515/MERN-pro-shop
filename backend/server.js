@@ -1,20 +1,28 @@
 import express from 'express';
-const app = express();
 import dotenv from 'dotenv';
+import cors from 'cors';
+import connectDB from './config/db.js';
+
+
 dotenv.config();
+const app = express();
+app.use(cors());
+
+connectDB();
 
 import products from './data/products.js';
+
 
 app.get('/', (req, res) => {
     res.send('This is a test');
 });
 
 
-app.get('/products', (req, res) => {
+app.get('/api/products', (req, res) => {
     res.json(products);
 });
 
-app.get('/products/:id', (req, res) => {
+app.get('/api/products/:id', (req, res) => {
     const getProduct = products.find(product => product._id === req.params.id);
     res.json(getProduct);
 })
