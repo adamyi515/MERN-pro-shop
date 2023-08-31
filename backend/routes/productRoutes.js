@@ -25,11 +25,10 @@ const getProductItem = asyncHandler(async (req, res) => {
             status: 'success',
             product: getProduct
         });
+    } else {
+        res.status(404);
+        throw new Error('Resource not found.');
     }
-
-    return res.status(500).json({
-        status: 'fail',
-    });
 
 })
 
